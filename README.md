@@ -28,6 +28,17 @@ vp dev
 | `vp build`       | Production build into `dist/`    |
 | `vp preview`     | Serve `dist/` locally            |
 
+## Linting
+
+Oxlint is configured in the `lint` section of `vite.config.ts` and aims to catch likely bugs early:
+
+- **Categories**: `correctness` rules are errors, `suspicious` and `perf` rules are warnings.
+- **React**: rules of hooks, exhaustive effect dependencies, missing `key`s, unstable nested components, unsafe `target="_blank"` links.
+- **TypeScript** (type-aware): no `any`, no unhandled promises, exhaustive `switch`es over unions, unnecessary conditions.
+- **Accessibility**: `jsx-a11y` rules, e.g. missing `alt` text and buttons without a `type`.
+
+`vp check` also runs a full type check as part of linting.
+
 A pre-commit hook (installed by `vp config` on install) runs `vp check --fix` on staged files.
 
 For format-on-save in VS Code, install the recommended Vite+ extension pack (see `.vscode/extensions.json`).
