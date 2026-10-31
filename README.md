@@ -10,22 +10,6 @@ An app for learning Italian that focuses on the harder parts, like grammar, whic
 - React Router 6 (Ionic 9 doesn't support React Router 7 yet, so don't upgrade it)
 - [vite-plugin-pwa](https://vite-pwa-org.netlify.app) so it installs to the home screen and works offline
 
-## Project structure
-
-```
-src/
-  App.tsx              Ionic setup, global CSS and routes
-  main.tsx             Entry point
-  theme/variables.css  Colour tokens (Ionic colours + --app-* tokens), light and dark
-  pages/               One component per routed screen
-```
-
-### Theme
-
-Colours come from the wireframes: Italian green `#00803d` is the primary colour, Italian red `#ce2b37` is `danger`, and ink `#1a1a1a` is `dark`. Use Ionic's `color` props (`color="primary"`) on Ionic components and the `--app-*` variables (`--app-muted`, `--app-border`, `--app-green-tint`, …) in your own CSS. Dark mode follows the device setting.
-
-Every routed screen should be wrapped in `IonPage` with an `IonContent`, otherwise Ionic's page transitions break.
-
 ## Getting started
 
 Install [Vite+](https://viteplus.dev/guide/) once. It also manages Node and pnpm, using the versions pinned in `package.json` (Node 26 LTS).
@@ -34,6 +18,25 @@ Install [Vite+](https://viteplus.dev/guide/) once. It also manages Node and pnpm
 vp install
 vp dev
 ```
+
+## Project structure
+
+```
+src/
+  App.tsx               Ionic setup, global CSS and routes
+  main.tsx              Entry point
+  theme/variables.css   Colour tokens (Ionic colours + --app-* tokens), light and dark
+  pages/                One component per routed screen
+public/                 Static files, including the logo and generated PWA icons
+vite.config.ts          Vite, lint, format, pre-commit and PWA config
+pwa-assets.config.ts    PWA icon generation settings
+```
+
+### Theme
+
+Colours come from the wireframes: Italian green `#00803d` is the primary colour, Italian red `#ce2b37` is `danger`, and ink `#1a1a1a` is `dark`. Use Ionic's `color` props (`color="primary"`) on Ionic components and the `--app-*` variables (`--app-muted`, `--app-border`, `--app-green-tint`, …) in your own CSS. Dark mode follows the device setting.
+
+Every routed screen should be wrapped in `IonPage` with an `IonContent`, otherwise Ionic's page transitions break.
 
 ## Commands
 
@@ -52,9 +55,10 @@ vp dev
 Oxlint is configured in the `lint` section of `vite.config.ts` and aims to catch likely bugs early:
 
 - **Categories**: `correctness` rules are errors, `suspicious` and `perf` rules are warnings.
-- **React**: rules of hooks, exhaustive effect dependencies, missing `key`s, unstable nested components, unsafe `target="_blank"` links.
+- **React**: rules of hooks, exhaustive effect dependencies, missing `key`s, unstable nested components, `<button>`s without a `type`, unsafe `target="_blank"` links.
 - **TypeScript** (type-aware): no `any`, no unhandled promises, exhaustive `switch`es over unions, unnecessary conditions.
-- **Accessibility**: `jsx-a11y` rules, e.g. missing `alt` text and buttons without a `type`.
+- **Accessibility**: `jsx-a11y` rules, e.g. missing `alt` text and unlabelled controls.
+- **Imports**: no circular or duplicate imports.
 
 `vp check` also runs a full type check as part of linting.
 
