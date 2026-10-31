@@ -25,7 +25,7 @@ vp dev
 src/
   App.tsx               Ionic setup, global CSS and routes
   main.tsx              Entry point
-  theme/variables.css   Colour tokens (Ionic colours + --app-* tokens), light and dark
+  theme/variables.css   Colour tokens (Ionic colours + --app-* tokens)
   pages/                One component per routed screen
 public/                 Static files, including the logo and generated PWA icons
 vite.config.ts          Vite, lint, format, pre-commit and PWA config
@@ -34,7 +34,7 @@ pwa-assets.config.ts    PWA icon generation settings
 
 ### Theme
 
-Colours come from the wireframes: Italian green `#00803d` is the primary colour, Italian red `#ce2b37` is `danger`, and ink `#1a1a1a` is `dark`. Use Ionic's `color` props (`color="primary"`) on Ionic components and the `--app-*` variables (`--app-muted`, `--app-border`, `--app-green-tint`, …) in your own CSS. Dark mode follows the device setting.
+Colours come from the wireframes: Italian green `#00803d` is the primary colour, Italian red `#ce2b37` is `danger`, and ink `#1a1a1a` is `dark`. Use Ionic's `color` props (`color="primary"`) on Ionic components and the `--app-*` variables (`--app-muted`, `--app-border`, `--app-green-tint`, …) in your own CSS. The app is light mode only.
 
 Every routed screen should be wrapped in `IonPage` with an `IonContent`, otherwise Ionic's page transitions break.
 
