@@ -1,6 +1,7 @@
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import babel from '@rolldown/plugin-babel'
 import { defineConfig, lazyPlugins } from 'vite-plus'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -72,5 +73,37 @@ export default defineConfig({
       },
     ],
   },
-  plugins: lazyPlugins(() => [react(), babel({ presets: [reactCompilerPreset()] })]),
+  plugins: lazyPlugins(() => [
+    react(),
+    babel({ presets: [reactCompilerPreset()] }),
+    VitePWA({
+      registerType: 'autoUpdate', // new versions install silently
+      devOptions: { enabled: true }, // test install + offline in dev
+      manifest: {
+        name: 'Learn Italian',
+        short_name: 'Italian',
+        description: 'Learn the Italian grammar other apps skip, in short and fun lessons.',
+        start_url: '/',
+        display: 'standalone',
+        orientation: 'portrait',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        icons: [
+          { src: 'pwa-64x64.png', sizes: '64x64', type: 'image/png' },
+          { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+          {
+            src: 'maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
+      },
+      workbox: {
+        // Cache the whole app so lessons work offline
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+      },
+    }),
+  ]),
 })

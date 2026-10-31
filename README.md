@@ -8,6 +8,7 @@ An app for learning Italian that focuses on the harder parts, like grammar, whic
 - [Vite+](https://viteplus.dev) (`vp`): dev server, build, lint (Oxlint), format (Oxfmt) and tests in one toolchain, all configured in `vite.config.ts`
 - [Ionic React](https://ionicframework.com/docs/react) 9 for native-feeling iOS and Android components, transitions and gestures
 - React Router 6 (Ionic 9 doesn't support React Router 7 yet, so don't upgrade it)
+- [vite-plugin-pwa](https://vite-pwa-org.netlify.app) so it installs to the home screen and works offline
 
 ## Project structure
 
@@ -60,3 +61,23 @@ Oxlint is configured in the `lint` section of `vite.config.ts` and aims to catch
 A pre-commit hook (installed by `vp config` on install) runs `vp check --fix` on staged files.
 
 For format-on-save in VS Code, install the recommended Vite+ extension pack (see `.vscode/extensions.json`).
+
+## PWA
+
+The app is an installable Progressive Web App. `vite-plugin-pwa` (configured in `vite.config.ts`) generates the web app manifest and a service worker that caches the whole app for offline use. New versions install silently (`autoUpdate`) and appear the next time the app is opened.
+
+### Icons
+
+All icons in `public/` are generated from `public/logo.svg`. After changing the logo, regenerate them:
+
+```bash
+vp exec pwa-assets-generator
+```
+
+The settings are in `pwa-assets.config.ts`.
+
+### Testing on a phone
+
+- **Quick UI checks**: run `vp dev --host` and open the network URL on your phone. The service worker won't register over plain HTTP.
+- **Installed app**: deploy `dist/` to a static host with HTTPS (Cloudflare Pages, Netlify, Vercel), open it in Safari, then Share → Add to Home Screen. Set the host to single-page-app mode so every route serves `index.html`.
+- In Chrome, DevTools → Application shows the manifest, the service worker and an offline toggle.
