@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://vite.dev/config/
 export default defineConfig({
   staged: {
-    '*': 'vp check --fix',
+    '*.{ts,tsx,js,css,json}': 'vp check --fix',
   },
   fmt: {
     singleQuote: true,
