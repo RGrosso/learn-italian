@@ -6,6 +6,24 @@ An app for learning Italian that focuses on the harder parts, like grammar, whic
 
 - [React](https://react.dev) + TypeScript
 - [Vite+](https://viteplus.dev) (`vp`): dev server, build, lint (Oxlint), format (Oxfmt) and tests in one toolchain, all configured in `vite.config.ts`
+- [Ionic React](https://ionicframework.com/docs/react) 9 for native-feeling iOS and Android components, transitions and gestures
+- React Router 6 (Ionic 9 doesn't support React Router 7 yet, so don't upgrade it)
+
+## Project structure
+
+```
+src/
+  App.tsx              Ionic setup, global CSS and routes
+  main.tsx             Entry point
+  theme/variables.css  Colour tokens (Ionic colours + --app-* tokens), light and dark
+  pages/               One component per routed screen
+```
+
+### Theme
+
+Colours come from the wireframes: Italian green `#00803d` is the primary colour, Italian red `#ce2b37` is `danger`, and ink `#1a1a1a` is `dark`. Use Ionic's `color` props (`color="primary"`) on Ionic components and the `--app-*` variables (`--app-muted`, `--app-border`, `--app-green-tint`, …) in your own CSS. Dark mode follows the device setting.
+
+Every routed screen should be wrapped in `IonPage` with an `IonContent`, otherwise Ionic's page transitions break.
 
 ## Getting started
 

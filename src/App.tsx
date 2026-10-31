@@ -1,5 +1,7 @@
+import { Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
+import IntroPage from './pages/IntroPage'
 
 import '@fontsource-variable/inter'
 import '@ionic/react/css/core.css'
@@ -18,7 +20,9 @@ export default function App() {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonRouterOutlet />
+        <IonRouterOutlet>
+          <Route path="/" element={<IntroPage />} />
+        </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
   )
