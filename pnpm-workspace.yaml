@@ -8,3 +8,7 @@ peerDependencyRules:
     - vite
   allowedVersions:
     vite: '*'
+
+# Let Vite+ manage the Node and pnpm versions instead of pnpm
+runtimeOnFail: ignore
+pmOnFail: ignore
